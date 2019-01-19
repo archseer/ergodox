@@ -3,6 +3,18 @@
 #include "debug.h"
 #include "action_layer.h"
 
+enum unicode_names {
+  EURO,
+  POUND,
+  DOLLAR,
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+  [EURO]  = 0x20AC,
+  [POUND] = 0x00A3,
+  [DOLLAR] = 0x24,
+};
+
 #define BASE 0
 #define SYMB 1
 #define PLVR 2
@@ -17,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab    |   Q  |   W  |   D  |   F  |   K  | ' "  |           | \ |  |   J  |   U  |   R  |   L  |  ; : |   -  _ |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | CtlEsc |   A  |   S  |   E  |   T  |   G  |------|           |------|   Y  |   N  |   I  |   O  |   H  |   =  + |
- * |--------+------+------+------+------+------|  {   |           | }    |------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------| {    |           | }    |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   P  |   M  |  , < |  . > |  / ? | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | ` ~  | CtlA |      | Alt  | Cmd  |                                       | ARRW | SYMB |      |   [  |   ]  |
@@ -75,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_TRNS,
     KC_TRNS,       KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,
-    KC_TRNS,       FR_EURO, FR_PND,  FR_DLR,  KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,       X(EURO), X(POUND),X(DOLLAR),KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS, KC_TRNS,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS,
