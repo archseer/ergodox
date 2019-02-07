@@ -1,0 +1,9 @@
+#ifndef CONFIG_USER_H
+#define CONFIG_USER_H
+
+#include QMK_KEYBOARD_CONFIG_H
+
+#undef TAPPING_TOGGLE
+#define TAPPING_TOGGLE 2
+
+#endif
