@@ -40,7 +40,7 @@ enum planck_keycodes {
   EXT_PLV
 };
 
-#define LOWER MO(_LOWER)
+#define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ENT)
 #define ARROW MO(_ARROW)
 
@@ -56,6 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | `    |      | Alt  | GUI  |Lower |Space |Bcksp |Raise |   "  |      |      |Arrow |
  * `-----------------------------------------------------------------------------------'
  * Raise is Enter on tap
+ * Lower is Tab on tap
  */
 [_NORMAN] = LAYOUT_planck_grid(
     KC_TAB,         KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, KC_MINS,
