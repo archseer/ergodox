@@ -20,8 +20,8 @@
 extern keymap_config_t keymap_config;
 
 enum planck_layers {
-  _QWERTY,
   _NORMAN,
+  _QWERTY,
   _COLEMAK,
   _DVORAK,
   _LOWER,
