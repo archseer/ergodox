@@ -109,8 +109,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | `    |      | Alt  | GUI  |Lower |Space |Bcksp |Raise |      |      |      |Arrow |
+ * | `    |      | Alt  | GUI  |Lower |Space |Bcksp |Raise |      | F14  | F15  |Arrow |
  * `-----------------------------------------------------------------------------------'
+ * F14 & F15 are brightness up and down
  */
 [_DVORAK] = LAYOUT_planck_grid(
     KC_TAB,         KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    _______,
@@ -129,12 +130,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      | Del  |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
+ * F14 & F15 are brightness up and down
  */
 [_LOWER] = LAYOUT_planck_grid(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR, KC_PIPE,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, KC_DEL,  _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+    _______, _______, _______, _______, _______, _______, KC_DEL,  _______, KC_MNXT, KC_F14,  KC_F15,  KC_MPLY
 ),
 
 /* Raise
