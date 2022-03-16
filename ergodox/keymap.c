@@ -1,7 +1,6 @@
 // Based on https://raw.githubusercontent.com/qmk/qmk_firmware/master/layouts/community/ergodox/romanzolotarev-norman-plover-osx-hjkl/keymap.c
 #include QMK_KEYBOARD_H
 #include "debug.h"
-#include "action_layer.h"
 
 enum unicode_names {
   EURO,
@@ -9,16 +8,18 @@ enum unicode_names {
   DOLLAR,
 };
 
+enum layers {
+  BASE = 0,
+  SYMB = 1,
+  PLVR = 2,
+  ARRW = 3
+};
+
 const uint32_t PROGMEM unicode_map[] = {
   [EURO]  = 0x20AC,
   [POUND] = 0x00A3,
   [DOLLAR] = 0x24,
 };
-
-#define BASE 0
-#define SYMB 1
-#define PLVR 2
-#define ARRW 3
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -50,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,    LCTL(KC_A),  KC_NO,   KC_LALT, KC_LGUI,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_VOLD, KC_MUTE,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    /*-*/    KC_VOLU,
-    /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_SPC,  KC_BSPC,  KC_FN1,
+    /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_SPC,  KC_BSPC,       TT(SYMB),
     //
     /*-*/          KC_F15,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,          TG(PLVR),
     /*-*/          KC_BSLS, KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN,       KC_MINS,
@@ -59,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*-*/          /*-*/    /*-*/    KC_NO,   KC_NO,   KC_LBRC, KC_RBRC,       KC_NO,
     KC_MPLY,       KC_MNXT,
     KC_MPRV,
-    KC_FN3,        KC_TAB,  KC_ENT
+    TT(ARRW),      KC_TAB,  KC_ENT
   ),
   
 /* Keymap 0: Symbol layer
@@ -163,49 +164,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-  [SYMB] = ACTION_LAYER_TAP_TOGGLE(SYMB), // FN1 - Momentary Symbols Layer
-  [PLVR] = ACTION_LAYER_TAP_TOGGLE(PLVR), // FN2 - Momentary Plover Layer
-  [ARRW] = ACTION_LAYER_TAP_TOGGLE(ARRW), // FN3 - Momentary Arrows Layer
-};
+// Runs whenever there is a layer state change.
+layer_state_t layer_state_set_user(layer_state_t state) {
+    ergodox_board_led_off();
+    ergodox_right_led_1_off();
+    ergodox_right_led_2_off();
+    ergodox_right_led_3_off();
 
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
-{
-  // MACRODOWN only works in this function
-  switch(id) {
-    case 0:
-      if (record->event.pressed) {
-        register_code(KC_RSFT);
-      } else {
-        unregister_code(KC_RSFT);
-      }
-      break;
-  }
-  return MACRO_NONE;
-};
+    uint8_t layer = get_highest_layer(state);
+    switch (layer) {
+        case 0:
+#ifdef RGBLIGHT_COLOR_LAYER_0
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_0);
+#endif
+            break;
+        case 1:
+            ergodox_right_led_1_on();
+#ifdef RGBLIGHT_COLOR_LAYER_1
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_1);
+#endif
+            break;
+        case 2:
+            ergodox_right_led_2_on();
+#ifdef RGBLIGHT_COLOR_LAYER_2
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_2);
+#endif
+            break;
+        case 3:
+            ergodox_right_led_3_on();
+#ifdef RGBLIGHT_COLOR_LAYER_3
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_3);
+#endif
+            break;
+        case 4:
+            ergodox_right_led_1_on();
+            ergodox_right_led_2_on();
+#ifdef RGBLIGHT_COLOR_LAYER_4
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_4);
+#endif
+            break;
+        case 5:
+            ergodox_right_led_1_on();
+            ergodox_right_led_3_on();
+#ifdef RGBLIGHT_COLOR_LAYER_5
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_5);
+#endif
+            break;
+        case 6:
+            ergodox_right_led_2_on();
+            ergodox_right_led_3_on();
+#ifdef RGBLIGHT_COLOR_LAYER_6
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_6);
+#endif
+            break;
+        case 7:
+            ergodox_right_led_1_on();
+            ergodox_right_led_2_on();
+            ergodox_right_led_3_on();
+#ifdef RGBLIGHT_COLOR_LAYER_7
+            rgblight_setrgb(RGBLIGHT_COLOR_LAYER_7);
+#endif
+            break;
+        default:
+            break;
+    }
 
-// Runs just one time when the keyboard initializes.
-void matrix_init_user(void) {
-};
-
-// Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {
-  uint8_t layer = biton32(layer_state);
-  ergodox_board_led_off();
-  ergodox_right_led_1_off();
-  ergodox_right_led_2_off();
-  ergodox_right_led_3_off();
-  switch (layer) {
-    case SYMB:
-      ergodox_right_led_1_on();
-      break;
-    case PLVR:
-      ergodox_right_led_2_on();
-      break;
-    case ARRW:
-      ergodox_right_led_3_on();
-      break;
-    default:
-      break;
-  }
+    return state;
 };
