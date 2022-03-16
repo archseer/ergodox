@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------| {    |           | }    |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   P  |   M  |  , < |  . > |  / ? | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | ` ~  | CtlA |      | Alt  | Cmd  |                                       |      |      |   [  |   ]  |      |
+ *   | ` ~  | CtlA |      | Alt  | Cmd  |                                       | RAlt |      |   [  |   ]  |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | VolD | Mute |       |      |      |
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*-*/          KC_BSLS, KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN,       KC_MINS,
     /*-*/          /*-*/    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,          KC_EQL,
     /*-*/          KC_RCBR, KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,       KC_RSPC,
-    /*-*/          /*-*/    /*-*/    KC_NO,   KC_NO,   KC_LBRC, KC_RBRC,       KC_NO,
+    /*-*/          /*-*/    /*-*/    KC_RALT, KC_NO,   KC_LBRC, KC_RBRC,       KC_NO,
     KC_MPLY,       KC_MNXT,
     KC_MPRV,
     TT(ARRW),      KC_TAB,  KC_ENT
