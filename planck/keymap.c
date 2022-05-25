@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   P  |   M  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | `    |      | Alt  | GUI  |Lower |Space |Bcksp |Raise |   "  |      |      |Arrow |
+ * | `    |      | Alt  | GUI  |Lower |Space |Bcksp |Raise |   "  | RAlt |      |Arrow |
  * `-----------------------------------------------------------------------------------'
  * Raise is Enter on tap
  * Lower is Tab on tap
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,        KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, KC_MINS,
     CTL_T(KC_ESC),  KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    KC_EQL,
     KC_LSPO,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,
-    KC_GRV,         _______, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_BSPC, RAISE,   KC_QUOT, _______, _______, ARROW
+    KC_GRV,         _______, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_BSPC, RAISE,   KC_QUOT, KC_RALT, _______, ARROW
 ),
 
 /* Qwerty
