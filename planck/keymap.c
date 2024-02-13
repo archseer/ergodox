@@ -51,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |CtlEsc|   A  |   S  |   E  |   T  |   G  |   Y  |   N  |   I  |   O  |   H  | = +  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   P  |   M  |   ,  |   .  |   /  |Shift |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   P  |   M  |   ,  |   .  |  / ? |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | `    |      | Alt  | GUI  |Lower |Space |Bcksp |Raise |   "  | RAlt |      |Arrow |
+ * | ` ~  |      | Alt  | Cmd  |Lower |Space |Bcksp |Raise |  ' " | RAlt |      |Arrow |
  * `-----------------------------------------------------------------------------------'
  * Raise is Enter on tap
  * Lower is Tab on tap
@@ -205,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
-    _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______,
+    _______, QK_BOOT, DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______,
     _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, NORMAN,  QWERTY,   COLEMAK,  DVORAK,  PLOVER,
     _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, KC_DEL,  _______, _______,  _______, _______, _______

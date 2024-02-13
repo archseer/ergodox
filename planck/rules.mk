@@ -1,2 +1,9 @@
 SRC += muse.c
+
 COMMAND_ENABLE = no
+UNICODE_ENABLE = no
+GRAVE_ESC_ENABLE = no
+
+CAPS_WORD_ENABLE = yes
+
+LTO_ENABLE = yes

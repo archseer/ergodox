@@ -2,12 +2,6 @@
 #include QMK_KEYBOARD_H
 #include "debug.h"
 
-enum unicode_names {
-  EURO,
-  POUND,
-  DOLLAR,
-};
-
 enum layers {
   BASE = 0,
   SYMB = 1,
@@ -15,11 +9,21 @@ enum layers {
   ARRW = 3
 };
 
-const uint32_t PROGMEM unicode_map[] = {
-  [EURO]  = 0x20AC,
-  [POUND] = 0x00A3,
-  [DOLLAR] = 0x24,
+#ifdef KEY_OVERRIDE_ENABLE  // If using QMK's key overrides...
+#define w_shift(kc, kc_override) &ko_make_basic(MOD_MASK_SHIFT, kc, kc_override)
+#define wo_shift(kc, kc_override) &ko_make_with_layers_and_negmods(0, kc, kc_override, ~0, (uint8_t)MOD_MASK_SHIFT)
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    // swap - and _ (_ is more frequent)
+    // wo_shift(KC_MINUS, KC_UNDERSCORE),
+    // w_shift(KC_MINUS, KC_MINUS),
+    // swap " and ' (" is more frequent)
+    wo_shift(KC_QUOTE, KC_DOUBLE_QUOTE),
+    w_shift(KC_QUOTE, KC_QUOTE),
+    NULL // Null terminate the array of overrides!
 };
+#endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -27,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | F1     |   1  |   2  |   3  |   4  |   5  | F14  |           | F15  |   6  |   7  |   8  |   9  |   0  | Plover |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |   Q  |   W  |   D  |   F  |   K  | ' "  |           | \ |  |   J  |   U  |   R  |   L  |  ; : |   -  _ |
+ * |        |   Q  |   W  |   D  |   F  |   K  | " '  |           | \ |  |   J  |   U  |   R  |   L  |  ; : |   -  _ |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | CtlEsc |   A  |   S  |   E  |   T  |   G  |------|           |------|   Y  |   N  |   I  |   O  |   H  |   =  + |
  * |--------+------+------+------+------+------| {    |           | }    |------+------+------+------+------+--------|
@@ -70,9 +74,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |   !  |   @  |   #  |   $  |   %  |------|           |------|   ^  |   &  |   *  |      |      |        |
+ * |        |   !  |   @  |   #  |   %  |   $  |------|           |------|   ^  |   &  |   *  |      |      |        |
  * |--------+------+------+------+------+------| [    |           | ]    |------+------+------+------+------+--------|
- * |        |   €  |   £  |   $  |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -87,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [SYMB] = LAYOUT_ergodox(
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_TRNS,
-    KC_TRNS,       KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,
-    KC_TRNS,       X(EURO), X(POUND),X(DOLLAR),KC_TRNS, KC_TRNS, KC_LBRC,
+    KC_TRNS,       KC_EXLM, KC_AT,   KC_HASH, KC_PERC,  KC_DLR,
+    KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS, KC_TRNS, KC_LBRC,
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS, KC_TRNS,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS,
@@ -125,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Arrow layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      | Reset|           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -144,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `----------------------'
  */
   [ARRW] = LAYOUT_ergodox(
-    KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, QK_BOOT,
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_TRNS, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R,
     KC_TRNS,       KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_TRNS,
