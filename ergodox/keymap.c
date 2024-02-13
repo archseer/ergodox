@@ -19,8 +19,8 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     // wo_shift(KC_MINUS, KC_UNDERSCORE),
     // w_shift(KC_MINUS, KC_MINUS),
     // swap " and ' (" is more frequent)
-    wo_shift(KC_QUOTE, KC_DOUBLE_QUOTE),
-    w_shift(KC_QUOTE, KC_QUOTE),
+    // wo_shift(KC_QUOTE, KC_DOUBLE_QUOTE),
+    // w_shift(KC_QUOTE, KC_QUOTE),
     NULL // Null terminate the array of overrides!
 };
 #endif
@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | F1     |   1  |   2  |   3  |   4  |   5  | F14  |           | F15  |   6  |   7  |   8  |   9  |   0  | Plover |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |   Q  |   W  |   D  |   F  |   K  | " '  |           | \ |  |   J  |   U  |   R  |   L  |  ; : |   -  _ |
+ * |        |   Q  |   W  |   D  |   F  |   K  | ' "  |           | \ |  |   J  |   U  |   R  |   L  |  ; : |   -  _ |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | CtlEsc |   A  |   S  |   E  |   T  |   G  |------|           |------|   Y  |   N  |   I  |   O  |   H  |   =  + |
  * |--------+------+------+------+------+------| {    |           | }    |------+------+------+------+------+--------|
