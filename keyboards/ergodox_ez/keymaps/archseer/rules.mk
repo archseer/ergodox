@@ -6,3 +6,8 @@ KEY_OVERRIDE_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 
 LTO_ENABLE = yes
+
+# for timeless mods
+REPEAT_KEY_ENABLE = yes
+
+SRC += achordion.c
