@@ -5,9 +5,10 @@
 
 enum layers {
   BASE = 0,
-  SYMB = 1,
+  SYM = 1,
   PLVR = 2,
-  ARRW = 3
+  NAV = 3,
+  NUM = 4
 };
 
 #ifdef KEY_OVERRIDE_ENABLE  // If using QMK's key overrides...
@@ -40,6 +41,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 #define HOME_O LALT_T(KC_O)
 #define HOME_H RGUI_T(KC_H)
 
+// // Left-hand home row mods
 // #define HOME_A KC_A
 // #define HOME_S KC_S
 // #define HOME_E KC_E
@@ -70,27 +72,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 ,------+------+------|       |------+------+------.
  *                                 |      |      | VolU |       |      |      |      |
  *                                 |Space |Back  |------|       |------| Tab  |Enter |
- *                                 |      |space | SYMB |       | ARRW |      |      |
+ *                                 |      |space | SYM  |       | NAV  |      |      |
  *                                 `--------------------'       `--------------------'
  */
   [BASE] = LAYOUT_ergodox(
-    KC_F3,         KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_F14,
+    KC_F3,         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_F14,
     KC_NO,         KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_QUOT,
     CTL_T(KC_ESC), HOME_A,  HOME_S,  HOME_E,  HOME_T,  KC_G,
-    KC_LPRN,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LCBR,
+    SC_LSPO,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LCBR,
     KC_GRV,    LCTL(KC_A),  KC_NO,   KC_LALT, KC_LGUI,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_VOLD, KC_MUTE,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    /*-*/    KC_VOLU,
-    /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    LT(SYMB, KC_SPC),  KC_BSPC,       TT(SYMB),
+    /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    LT(SYM, KC_SPC), KC_BSPC, TT(NUM),
     //
-    /*-*/          KC_F15,  KC_6,   KC_7,   KC_8,   KC_9,   KC_0,         TG(PLVR),
+    /*-*/          KC_F15,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,          TG(PLVR),
     /*-*/          KC_BSLS, KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN,       KC_MINS,
     /*-*/          /*-*/    KC_Y,    HOME_N,  HOME_I,  HOME_O,  HOME_H,        KC_EQL,
-    /*-*/          KC_RCBR, KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,       KC_RPRN,
+    /*-*/          KC_RCBR, KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,       SC_RSPC,
     /*-*/          /*-*/    /*-*/    KC_RALT, KC_NO,   KC_NO,   KC_NO,         KC_NO,
     KC_MPLY,       KC_MNXT,
     KC_MPRV,
-    TT(ARRW),      KC_TAB,  LT(ARRW, KC_ENT)
+    TT(NAV),       KC_TAB,  LT(NAV, KC_ENT)
   ),
   
 /* Keymap 0: Symbol layer
@@ -114,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |        |      |
  *                                 `--------------------'       `----------------------'
  */
-  [SYMB] = LAYOUT_ergodox(
+  [SYM] = LAYOUT_ergodox(
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_EXLM, KC_AT,   KC_HASH, KC_PERC,  KC_DLR,
@@ -152,16 +154,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,
     KC_NO,         KC_N,    KC_M
   ),
-/* Keymap 0: Arrow layer
- *
+/* Keymap 0: Number layer
+ * TODO: add oneshot mods on left side
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      | Reset|           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |   7  |   8  |   9  |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      |   1  |   2  |   3  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |   4  |   5  |   6  |      |------|           |------| LEFT | DOWN |  UP  | RIGT |      |        |
+ * |        | Cmd  | Alt  | Shift| Ctrl |      |------|           |------|      |   4  |   5  |   6  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |   1  |   2  |   3  |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      |   7  |   8  |   9  |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -169,28 +171,68 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      |        |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      |      |       |      |        |      |
- *                                 |      |   0  |------|       |------|        |      |
+ *                                 |      |      |------|       |------|    0   |      |
  *                                 |      |      |      |       |      |        |      |
  *                                 `--------------------'       `----------------------'
  */
-  [ARRW] = LAYOUT_ergodox(
+  [NUM] = LAYOUT_ergodox(
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, QK_BOOT,
-    KC_TRNS,       KC_TRNS, KC_7,    KC_8,    KC_9,   KC_TRNS, KC_TRNS,
-    KC_TRNS,       KC_TRNS, KC_4,    KC_5,    KC_6,   KC_TRNS,
-    KC_TRNS,       KC_TRNS, KC_1,    KC_2,    KC_3,   KC_TRNS, KC_TRNS,
+    KC_TRNS,       KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   KC_TRNS,
+    KC_TRNS,       OSM(MOD_LGUI),  OSM(MOD_LALT), OSM(KC_LCTL), OSM(KC_LSFT), KC_NO,
+    KC_TRNS,       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TRNS,
     KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS, KC_TRNS,
     /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS,
-    /*-*/          /*-*/    /*-*/    /*-*/    KC_TRNS, KC_0, KC_TRNS,
+    /*-*/          /*-*/    /*-*/    /*-*/    KC_TRNS, KC_TRNS, KC_TRNS,
+    //
+    /*-*/          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,
+    /*-*/          KC_TRNS, KC_TRNS, KC_1,    KC_2,    KC_3,    KC_TRNS,       KC_TRNS,
+    /*-*/          /*-*/    KC_TRNS, KC_4,    KC_5,    KC_6,    KC_TRNS,       KC_TRNS,
+    /*-*/          KC_TRNS, KC_TRNS, KC_7,    KC_8,    KC_9,    KC_TRNS,       KC_TRNS,
+    /*-*/          /*-*/    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,       KC_TRNS,
+    KC_TRNS,
+    KC_TRNS,       KC_0, KC_TRNS
+  ),
+/* Keymap 0: Arrow layer
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      | Reset|           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------| LEFT | DOWN |  UP  | RIGT |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |        |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      |      |       |      |        |      |
+ *                                 |      |      |------|       |------|        |      |
+ *                                 |      |      |      |       |      |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+  [NAV] = LAYOUT_ergodox(
+    KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, QK_BOOT,
+    KC_TRNS,       KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,    KC_TRNS,
+    KC_TRNS,       KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,
+    KC_TRNS,       KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,    KC_TRNS,
+    KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS, KC_TRNS,
+    /*-*/          /*-*/    /*-*/    /*-*/    /*-*/    /*-*/    KC_TRNS,
+    /*-*/          /*-*/    /*-*/    /*-*/    KC_TRNS, KC_TRNS, KC_TRNS,
     //
     /*-*/          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,
     /*-*/          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,
     /*-*/          /*-*/    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_TRNS,       KC_TRNS,
-    /*-*/,         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,
+    /*-*/          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,
     /*-*/          /*-*/    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,       KC_TRNS,
     KC_TRNS,
-    KC_TRNS,       KC_TRNS, KC_TRNS
+    KC_TRNS,       KC_0, KC_TRNS
   ),
 };
 
@@ -302,13 +344,16 @@ bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                      uint16_t other_keycode, keyrecord_t* other_record) {
   // Exceptionally consider the following chords as holds, even though they
   // are on the same hand in Magic Sturdy.
-  // switch (tap_hold_keycode) {
-  //   case HOME_X:  // X + D and X + G.
-  //     if (other_keycode == HOME_D || other_keycode == KC_G) {
-  //       return true;
-  //     }
-  //     break;
-  // }
+  switch (tap_hold_keycode) {
+    case CTL_T(KC_ESC):
+      return true;
+      break;
+    // case HOME_X:  // X + D and X + G.
+    //   if (other_keycode == HOME_D || other_keycode == KC_G) {
+    //     return true;
+    //   }
+    //   break;
+  }
 
   // Also allow same-hand holds when the other key is in the rows below the
   // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
@@ -322,8 +367,8 @@ bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
 
 uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
   switch (tap_hold_keycode) {
-    case LT(SYMB, KC_SPC):
-    case LT(ARRW, KC_ENT):
+    case LT(SYM, KC_SPC):
+    case LT(NAV, KC_ENT):
       return 0;  // Bypass Achordion for these keys.
   }
 
